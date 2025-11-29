@@ -1,54 +1,27 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import {
-  View,
-  Text,
   FlatList,
   StyleSheet,
+  Text,
   TouchableOpacity,
+  View,
 } from "react-native";
-import SearchBar from "../components/SearchBar";
 import FilterBar from "../components/FilterBar";
+import SearchBar from "../components/SearchBar";
+import { useAppContext } from "../context/AppContext";
 import {
   CATEGORIES,
-  LISTING_TYPES,
-  CONDITIONS,
   COLORS,
+  CONDITIONS,
+  LISTING_TYPES,
 } from "../utils/constants";
 
 export default function BrowseScreen({ navigation }) {
-  const [books, setBooks] = useState([]);
+  const { books } = useAppContext();
   const [searchQuery, setSearchQuery] = useState("");
   const [category, setCategory] = useState("All");
   const [listingType, setListingType] = useState("All");
   const [condition, setCondition] = useState("All");
-
-  useEffect(() => {
-    const sampleBooks = [
-      {
-        id: "1",
-        title: "Introduction to Algorithms",
-        author: "Cormen, Leiserson",
-        category: "Computer Science",
-        condition: "Good",
-        price: 45,
-        listingType: "Sale",
-        status: "Available",
-        contact: "john@example.com",
-      },
-      {
-        id: "2",
-        title: "The Art of Computer Programming",
-        author: "Donald Knuth",
-        category: "Computer Science",
-        condition: "Like New",
-        price: 0,
-        listingType: "Exchange",
-        status: "Available",
-        contact: "sarah@example.com",
-      },
-    ];
-    setBooks(sampleBooks);
-  }, []);
 
   const filteredBooks = books.filter((book) => {
     const matchesSearch =
